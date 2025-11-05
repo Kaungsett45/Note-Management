@@ -7,6 +7,7 @@ function Register() {
     name: "",
     email: "",
     password: "" });
+  const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
 
@@ -44,13 +45,22 @@ function Register() {
         onChange={(e) => setForm({ ...form, email: e.target.value })}
         className="border p-2 w-full mb-2 rounded"
       />
-      <input
-        type="password"
-        placeholder="Password"
-         value={form.password}
+      <div className="relative mb-4">
+        <input
+          type={showPassword ? "text" : "password"}
+          placeholder="Password"
+          value={form.password}
           onChange={(e) => setForm({ ...form, password: e.target.value })}
-        className="border p-2 w-full mb-4 rounded"
-      />
+          className="border p-2 w-full rounded pr-10"
+        />
+        <button
+          type="button"
+          onClick={() => setShowPassword(!showPassword)}
+          className="absolute right-2 top-2 text-gray-500 hover:text-gray-700"
+        >
+          {showPassword ? "Hide" : "Visible"}
+        </button>
+      </div>
       <button className="bg-blue-500 text-white w-full py-2 rounded hover:bg-blue-600">
         Register
       </button>
