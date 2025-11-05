@@ -20,7 +20,6 @@ export const createNote = async (req, res) => {
   }
 };
 
-// Get all notes for logged-in user
 export const getNotes = async (req, res) => {
   try {
     const notes = await Note.find({ user: req.user.id });
@@ -30,7 +29,7 @@ export const getNotes = async (req, res) => {
   }
 };
 
-// Update note
+
 export const updateNote = async (req, res) => {
   const { title, content } = req.body;
 
@@ -53,7 +52,6 @@ export const updateNote = async (req, res) => {
   }
 };
 
-// Delete note
 export const deleteNote = async (req, res) => {
  try {
     const note = await Note.findById(req.params.id);
@@ -63,7 +61,7 @@ export const deleteNote = async (req, res) => {
       return res.status(403).json({ message: "Not authorized" });
     }
 
-    await note.remove();
+    await note.deleteOne();
     res.json({ message: "Note deleted " });
   } catch (error) {
     console.error(error);
